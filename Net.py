@@ -15,7 +15,16 @@ class NeuralNetwork:
         self.activation_function = lambda x: scipy.special.expit(x)
         pass
 
-    def train(self):
+    def train(self, inputs_list, targets_list):
+        inputs = numpy.array(inputs_list, ndmin=2).T
+        targets = numpy.array(targets_list, ndmin=2).T
+
+        hidden_inputs = numpy.dot(self.wih, inputs)
+        hidden_outputs = self.activation_function(hidden_inputs)
+
+        final_inputs = numpy.dot(self.who, hidden_outputs)
+        final_outputs = self.activation_function(final_inputs)
+        return final_outputs
         pass
 
     def query(self, inputs_list):
